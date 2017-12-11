@@ -26,7 +26,7 @@ The contract stores a list of tokens it will accept.
 For each accepted token, there is a minimum amount that can be paid to an address as a [dividend](#dividend). This is to avoid generating excessive transactions for small balances.
 
 ### `mostVotesPerRound`
-The highest number of votes received in a round. Used for computing [`dividendWhenAdded`](#dividendWhenAdded).
+The highest number of votes received so far in a round. Used for computing [`dividendWhenAdded`](#dividendWhenAdded).
 
 ### Other Variables
 [Other variables](#variables) affecting the operation of the contract are updated to match the variables set by a winning [proposal](#proposals) when the [proposal is run](#runproposal).
