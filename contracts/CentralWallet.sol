@@ -7,7 +7,7 @@ contract MyWallet {
     event receivedFunds(address _from, uint256 _amount);
 
     /**
-     * Edit Oct 2017:
+     
      * Added the proposal_id as it leaded to a lot of confusion how to get the actual id in "confirmProposal"
      **/
     event proposalReceived(address indexed _from, address indexed _to, string _reason, uint256 proposal_id);
