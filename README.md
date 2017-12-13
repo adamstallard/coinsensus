@@ -6,6 +6,12 @@ Others may contribute to the mission of an instance of the token by donating oth
 
 Holders of the token may receive dividends from the donated tokens.
 
+## The Idea
+
+The token is distributed according to votes.  During each time period, white-listed voters send their vote to the smart contract.  The transfer is a small amount of ether--the actual vote is an address that holds a proposal.  The proposal address is another smart contract that is capable of sending to the original contract 1) addresses to be added to the white-list 2) addresses to be removed 3) address(es) to receive new tokens.
+
+The idea is for members to decide (near) unanimously who their membership is and who receives tokens each round.  Token-holders can also be paid semi-regularly with the ether that accumulates in the original smart contract that's taken from voters or from donor deposits.
+
 ## Particulars
 Near-consensus is required among those that vote each round, but there's no requirement of quorum.
 
