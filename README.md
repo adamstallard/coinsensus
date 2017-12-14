@@ -13,7 +13,7 @@ The token is distributed according to votes.  During each time period, white-lis
 1. Addresses to be removed from the voting white-list
 1. Addresses to receive new tokens
 
-Members decide near-unanimously who their membership is and who receives tokens each round.  Token-holders can also be paid semi-regularly with the ether that accumulates in the original smart contract that's taken from voters or from donor deposits.
+Members decide near-unanimously who their membership is and who receives tokens each round.  Token-holders can also be paid semi-regularly with the ether (or other tokens) that accumulate in the original smart contract that's taken from voters or other fees or from donor deposits.
 
 Near-consensus is required among those that vote each round, but there's no requirement of quorum.
 
