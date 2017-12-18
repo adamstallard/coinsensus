@@ -48,7 +48,7 @@ The caller must already be on the list of [voter addresses](#voters). This sets 
 This may be called once after a round is closed by the [proposal caller](#proposalcaller) set in the proposal that was selected with [near-consensus](#near-consensus). If there was no such proposal, calling this function has no effect.
 
 ## Proposals
-Proposals are created as smart contracts. They hold data that serve as instructions to update the main contract. Proposals are the subject of [votes](#vote0), and to be enacted, participating voters must choose a proposal with [near consensus](#near-consensus).
+Proposals are created as smart contracts. They hold data that serve as instructions to update the main contract. Proposals are the subject of [votes](#vote), and to be enacted, participating voters must choose a proposal with [near consensus](#near-consensus).
 
 Proposals are executed with the [`RunProposal`](#runproposal) function of the main contract. Because this can be expensive, it's expected that a proposal will include the [calling address](#proposalcaller) in the [recipients](#recipients) with a fair ratio of new coins.
 
@@ -70,7 +70,7 @@ The address that's authorized to call [RunProposal](#runproposal) on behalf of t
 A fee required for each vote. This must be paid in addition to the transaction fee required by the network. If [`voteFeeGasPriceMultiple`](#votefeegaspricemultiple) is non-zero, it's used instead.
 
 #### `voteFeeGasPriceMultiple`
-The fee required for each vote as a multiple of the gas price set in the call to [`vote`](#vote0). If this variable is non-zero, it's used instead of [`voteFee`](#votefee). 
+The fee required for each vote as a multiple of the gas price set in the call to [`vote`](#vote). If this variable is non-zero, it's used instead of [`voteFee`](#votefee). 
 
 #### `voteFeeToken`
 A token contract address (`0x0` for ether) used to pay the [vote fee](#votefee). This must be on the [list of accepted tokens](#acceptedtokens) for the main contract.
