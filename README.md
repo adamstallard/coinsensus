@@ -42,7 +42,7 @@ The highest number of votes received so far in a round. Used for computing [`div
 ## Functions
 
 ### `Vote`
-The caller must already be on the list of [voter addresses](#voters). This sets or updates the caller's [vote](#recent-votes) for the current round.
+The caller must already be on the list of [voter addresses](#voters). This sets or updates the caller's [vote](#recentvotes) for the current round.
 
 ### `RunProposal`
 This may be called once after a round is closed by the [proposal caller](#proposalcaller) set in the proposal that was selected with [near-consensus](#near-consensus). If there was no such proposal, calling this function has no effect.
@@ -73,16 +73,16 @@ A fee required for each vote. This must be paid in addition to the transaction f
 The fee required for each vote as a multiple of the gas price set in the call to [`vote`](#vote0). If this variable is non-zero, it's used instead of [`voteFee`](#votefee). 
 
 #### `voteFeeToken`
-A token contract address (`0x0` for ether) used to pay the [vote fee](#votefee). This must be on the [list of accepted tokens](#accepted-tokens) for the main contract.
+A token contract address (`0x0` for ether) used to pay the [vote fee](#votefee). This must be on the [list of accepted tokens](#acceptedtokens) for the main contract.
 
 #### `dividendWhenAdded`
 All 3rd-party tokens (including ether) held by the contract will be paid out proportionally to token holders if the number of votes in a round exceeds the previous highest number of votes by this value. The value can be negative. A value of `INT256_MIN` will cause the dividend to be paid no matter what, while `INT256_MAX` will prevent payment of the dividend.
 
 #### `acceptToken`
-The main contract will start [accepting this kind of token.](#accepted-tokens)
+The main contract will start [accepting this kind of token.](#acceptedtokens)
 
 #### `rejectToken`
-The main contract will stop [accepting this kind of token.](#accepted-tokens)
+The main contract will stop [accepting this kind of token.](#acceptedtokens)
 
 #### `addVoters`
 An array of addresses to add to [voters](#voters).
