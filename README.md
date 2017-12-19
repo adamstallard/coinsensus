@@ -94,7 +94,7 @@ A token contract address (`0x0` for ether) used to pay the [vote fee](#votefee).
 
 ## Dividends
 
-If the number of voters participating in a round meets the [`dividendWhenAdded`](#dividendwhenadded) constraint, holders of the token will be paid a dividend from a predetermined [fraction of the contract's holdings of other types of tokens](#dividend_fraction). Each holder is paid proportionally to the number of main contract tokens they hold. Those whose payment would fall below the [minimum token payout](#minimum-token-payout) for a particular token will be excluded from the payout for that token.
+If the number of voters participating in a round meets the [`dividendWhenAdded`](#dividendwhenadded) constraint, holders of the token will be paid a dividend which is a predetermined [fraction of the contract address' holdings of other types of tokens](#dividend_fraction). Each holder is paid proportionally to the number of main contract tokens they hold. Those whose payment would fall below the [minimum token payout](#minimum-token-payout) for a particular token will be excluded from the payout for that token.
 
 ## Contributions
 
