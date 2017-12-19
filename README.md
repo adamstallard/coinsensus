@@ -2,9 +2,9 @@
 
 Coinsensus is a token that's regularly minted and distributed according to near-consensus of a voting group with a growing or fluctuating membership.
 
-Others may contribute to the mission of an instance of the token by donating other tokens, including ether.
+The address of the token contract can hold other tokens given to it as fees or donations.
 
-Holders of the token may receive dividends from the donated tokens.
+Holders of the token may receive distributions of the other token types.
 
 ## Summary
 
