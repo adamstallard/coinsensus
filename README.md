@@ -2,9 +2,7 @@
 
 Coinsensus is a token that's regularly minted and distributed according to near-consensus of a voting group with a growing or fluctuating membership.
 
-The address of the token contract can hold other tokens given to it as fees or donations.
-
-Holders of the token may receive distributions of the other token types.
+The address of the token contract can hold other tokens given to it as fees or donations. Holders of the main contract token may receive these as dividends.
 
 ## Summary
 
@@ -28,10 +26,10 @@ The contract stores balances of tokens. Holding tokens is not limited to [voters
 The contract stores votes for the current round--one or zero votes per [voter](#voters).
 
 ### `acceptedTokens`
-The contract stores a list of tokens it will accept.
+The contract stores a list of tokens it will accept.  It will have to be familiar with the logic for sending these tokens (for instance ERC20).
 
 ### `minimumTokenPayout`
-For each accepted token, there is a minimum amount that can be paid to an address as a [dividend](#dividend). This is to avoid generating excessive transactions for small balances.
+For each accepted token, there's a minimum amount that can be paid to an address as a [dividend](#dividends). This is to avoid generating excessive transactions for small balances.
 
 ### `mostVotesPerRound`
 The highest number of votes received so far in a round. Used for computing [`dividendWhenAdded`](#dividendWhenAdded).
@@ -66,29 +64,32 @@ An map of addresses to ratios. Each address will receive that ratio of the coins
 #### `proposalCaller`
 The address that's authorized to call [RunProposal](#runproposal) on behalf of this proposal.
 
-#### `voteFee`
-A fee required for each vote. This must be paid in addition to the transaction fee required by the network. If [`voteFeeGasPriceMultiple`](#votefeegaspricemultiple) is non-zero, it's used instead.
-
-#### `voteFeeGasPriceMultiple`
-The fee required for each vote as a multiple of the gas price set in the call to [`vote`](#vote). If this variable is non-zero, it's used instead of [`voteFee`](#votefee). 
-
-#### `voteFeeToken`
-A token contract address (`0x0` for ether) used to pay the [vote fee](#votefee). This must be on the [list of accepted tokens](#acceptedtokens) for the main contract.
-
-#### `dividendWhenAdded`
-All 3rd-party tokens (including ether) held by the contract will be paid out proportionally to token holders if the number of votes in a round exceeds the previous highest number of votes by this value. The value can be negative. A value of `INT256_MIN` will cause the dividend to be paid no matter what, while `INT256_MAX` will prevent payment of the dividend.
-
-#### `acceptToken`
-The main contract will start [accepting this kind of token.](#acceptedtokens)
-
-#### `rejectToken`
-The main contract will stop [accepting this kind of token.](#acceptedtokens)
-
 #### `addVoters`
 An array of addresses to add to [voters](#voters).
 
 #### `removeVoters`
 An array of addesses to remove from [voters](#voters).
+
+#### `dividendWhenAdded`
+All 3rd-party tokens (including ether) held by the contract will be paid out proportionally to token holders if the number of votes in a round exceeds the previous highest number of votes by this value. The value can be negative. A value of `INT256_MIN` will cause the dividend to be paid no matter what, while `INT256_MAX` will prevent payment of the dividend.
+
+#### `acceptToken`
+The main contract will start [accepting this kind of token.](#acceptedtokens).  Each accepted token is a pair of ``tokenAddress``,[``minimumTokenPayout``](#minimumTokenPayout). This variable is also used to update the [minimumTokenPayout](#minimumTokenPayout) for an already accepted token.
+
+#### `rejectToken`
+The main contract will stop [accepting this kind of token.](#acceptedtokens)
+
+### :warning: Vote Fee Variables
+ The following three variables can easily block the main contract from operating (for example, by setting the voteFee very high or setting the voteFeeToken to a token that's hard to obtain). As such, the same variable values must appear in successive proposals for a predetermined number of rounds before they take effect. There is also constant to disable these variables completely.
+
+#### `voteFee`
+A fee required for each vote. This must be paid in addition to the transaction fee required by the network. If [`voteFeeGasPriceMultiple`](#votefeegaspricemultiple) is non-zero, it's used instead.
+
+#### `voteFeeGasPriceMultiple`
+The fee required for each vote as a multiple of the gas price set in the call to [`vote`](#vote). If this variable is non-zero, it's used instead of [`voteFee`](#votefee).
+
+#### `voteFeeToken`
+A token contract address (`0x0` for ether) used to pay the [vote fee](#votefee). This must be on the [list of accepted tokens](#acceptedtokens) for the main contract.
 
 ## Dividends
 
@@ -122,3 +123,11 @@ The ratio of votes that need to agree for a proposal to be ratified. It's possib
 ### `ROUND_LENGTH_HOURS`
 #### suggested value: `25`
 How long a voting round lasts.
+
+### `VOTE_FEE_ROUNDS`
+#### suggested value: `4`
+The number of successive matching proposals needed to [change vote fees](#votefeevariables).
+
+### `ENABLE_VOTE_FEES`
+#### suggested value: `true`
+Whether to use vote fees(#votefeevariables). This can be helpful in bootstrapping value, but must be used carefully.
