@@ -74,13 +74,14 @@ An array of addesses to remove from [voters](#voters).
 All 3rd-party tokens (including ether) held by the contract will be paid out proportionally to token holders if the number of votes in a round exceeds the previous highest number of votes by this value. The value can be negative. A value of `INT256_MIN` will cause the dividend to be paid no matter what, while `INT256_MAX` will prevent payment of the dividend.
 
 #### `acceptToken`
-The main contract will start [accepting this kind of token.](#acceptedtokens).  Each accepted token is a pair of ``tokenAddress``,[``minimumTokenPayout``](#minimumTokenPayout). This variable is also used to update the [minimumTokenPayout](#minimumTokenPayout) for an already accepted token.
+The main contract will start [accepting this kind of token.](#acceptedtokens).  Each accepted token is a pair of ``tokenAddress``,[``minimumTokenPayout``](#minimumtokenpayout). This variable is also used to update the [minimumTokenPayout](#minimumtokenpayout) for an already accepted token.
 
 #### `rejectToken`
 The main contract will stop [accepting this kind of token.](#acceptedtokens)
 
-### :warning: Vote Fee Variables
- The following three variables can easily block the main contract from operating (for example, by setting the voteFee very high or setting the voteFeeToken to a token that's hard to obtain). As such, the same variable values must appear in successive proposals for a predetermined number of rounds before they take effect. There is also constant to disable these variables completely.
+### Vote Fee Variables
+### :warning:
+The following three variables can easily block the main contract from operating (for example, by setting the [voteFee](#voteFee) very high or setting the [voteFeeToken](#voteFeeToken) to a token that's hard to obtain). As such, the same variable values must appear in successive proposals for a [predetermined number of rounds](#vote_fee_rounds) before they take effect. There's also [a constant to disable these variables completely](#enable_vote_fees).
 
 #### `voteFee`
 A fee required for each vote. This must be paid in addition to the transaction fee required by the network. If [`voteFeeGasPriceMultiple`](#votefeegaspricemultiple) is non-zero, it's used instead.
