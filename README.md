@@ -74,7 +74,7 @@ An array of addesses to remove from [voters](#voters).
 All 3rd-party tokens (including ether) held by the contract will be paid out proportionally to token holders if the number of votes in a round exceeds the previous highest number of votes by this value. The value can be negative. A value of `INT256_MIN` will cause the dividend to be paid no matter what, while `INT256_MAX` will prevent payment of the dividend.
 
 #### `acceptToken`
-The main contract will start [accepting this kind of token.](#acceptedtokens).  Each accepted token is a pair of ``tokenAddress``,[``minimumTokenPayout``](#minimumtokenpayout). This variable is also used to update the [minimumTokenPayout](#minimumtokenpayout) for an already accepted token.
+The main contract will start [accepting this kind of token.](#acceptedtokens).  Each accepted token is a pair of <``tokenAddress`` , [``minimumTokenPayout``](#minimumtokenpayout)>. This variable is also used to update the [minimumTokenPayout](#minimumtokenpayout) for an already accepted token.
 
 #### `rejectToken`
 The main contract will stop [accepting this kind of token.](#acceptedtokens)
@@ -131,4 +131,4 @@ The number of successive matching proposals needed to [change vote fees](#votefe
 
 ### `ENABLE_VOTE_FEES`
 #### suggested value: `true`
-Whether to use vote fees(#votefeevariables). This can be helpful in bootstrapping value, but must be used carefully.
+Whether to use [vote fees](#votefeevariables). These can be helpful in bootstrapping value, but must be used carefully.
