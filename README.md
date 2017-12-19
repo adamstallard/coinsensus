@@ -94,7 +94,7 @@ A token contract address (`0x0` for ether) used to pay the [vote fee](#votefee).
 
 ## Dividends
 
-If the number of voters participating in a round meets the [`dividendWhenAdded`](#dividendwhenadded) constraint, holders of the token will be paid all of the contract's holdings of other types of tokens. The payout is proportional to the number of main contract tokens held. Those whose payment would fall below the [minimum token payout](#minimum-token-payout) for a particular token will be excluded from the payout for that token.
+If the number of voters participating in a round meets the [`dividendWhenAdded`](#dividendwhenadded) constraint, holders of the token will be paid a dividend from a predetermined [fraction of the contract's holdings of other types of tokens](#dividend_fraction). Each holder is paid proportionally to the number of main contract tokens they hold. Those whose payment would fall below the [minimum token payout](#minimum-token-payout) for a particular token will be excluded from the payout for that token.
 
 ## Contributions
 
@@ -132,3 +132,6 @@ The number of successive matching proposals needed to [change vote fees](#votefe
 ### `ENABLE_VOTE_FEES`
 #### suggested value: `true`
 Whether to use [vote fees](#votefeevariables). These can be helpful in bootstrapping value, but must be used carefully.
+
+### `DIVIDEND_FRACTION`
+The fraction of the total holdings to be paid out when the [`dividendWhenAdded`](#dividendwhenadded) of a proposal is met. A value of `1` means that 100% of the holdings will be paid. A value of `.05` means that 5% of the holdings will be paid.
