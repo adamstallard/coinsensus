@@ -26,7 +26,7 @@ The contract stores balances of tokens. Holding tokens is not limited to [voters
 The contract stores votes for the current round--one or zero votes per [voter](#voters).
 
 ### `acceptedTokens`
-The contract stores a list of tokens it will accept.  It will have to be familiar with the logic for sending these tokens (for instance ERC20).
+The contract stores a list of tokens it will accept.  It has to be familiar with the logic for sending these tokens (for instance ERC20, ERC223).
 
 ### `minimumTokenPayout`
 For each accepted token, there's a minimum amount that can be paid to an address as a [dividend](#dividends). This is to avoid generating excessive transactions for small balances.
