@@ -46,7 +46,7 @@ The caller must already be on the list of [voter addresses](#voters). This sets 
 This may be called once after a round is closed by the [proposal caller](#proposalcaller) set in the proposal that was selected with [near-consensus](#near-consensus). If there was no such proposal, calling this function has no effect.
 
 ## Proposals
-Proposals are created as smart contracts. They hold data that serve as instructions to update the main contract. Proposals are the subject of [votes](#vote), and to be enacted, participating voters must choose a proposal with [near consensus](#near-consensus).
+Proposals are created as smart contracts. They hold data that serve as instructions to update the main contract. Proposals are the subject of [votes](#vote), and to be enacted, participating voters must choose a proposal with [near consensus](#near-consensus). The exception to this is [adding new voters](#addvoters), which can be done with a [simple majority](#add_voters_majority)
 
 Proposals are executed with the [`RunProposal`](#runproposal) function of the main contract. Because this can be expensive, it's expected that a proposal will include the [calling address](#proposalcaller) in the [recipients](#recipients) with a fair ratio of new coins.
 
@@ -65,7 +65,7 @@ An map of addresses to ratios. Each address will receive that ratio of the coins
 The address that's authorized to call [RunProposal](#runproposal) on behalf of this proposal.
 
 #### `addVoters`
-An array of addresses to add to [voters](#voters).
+An array of addresses to add to [voters](#voters).  This part of a proposal can be executed by itself if [Add_Voters_Marjority](#add_voters_majority) is reached, while [Near_Consensus](#near_consensus) isn't.
 
 #### `removeVoters`
 An array of addesses to remove from [voters](#voters).
@@ -119,7 +119,11 @@ This limits the [`newTokenRatio`](#newtokenratio) variable set by proposal contr
 
 ### `NEAR_CONSENSUS`
 #### suggested value: `.9`
-The ratio of votes that need to agree for a proposal to be ratified. It's possible that during a round, no proposal will be ratified.
+The ratio of votes that need to agree for a proposal to be enacted. It's possible that during a round, no proposal will be enacted.
+
+### `ADD_VOTERS_MAJORITY`
+#### suggested value: `.51`
+The ratio of votes a proposal needs for the [addVoters](#addvoters) portion of a proposal to be enacted. Having this value distinct from [NEAR_CONSENSUS](#NEAR_CONSENSUS) allows voters to unblock proposals by adding more voters.
 
 ### `ROUND_LENGTH_HOURS`
 #### suggested value: `25`
@@ -127,7 +131,7 @@ How long a voting round lasts.
 
 ### `VOTE_FEE_ROUNDS`
 #### suggested value: `4`
-The number of successive matching proposals needed to [change vote fees](#votefeevariables).
+The number of successive matching proposals with regard to [vote fee variables](#votefeevariables) needed to change vote fees.
 
 ### `ENABLE_VOTE_FEES`
 #### suggested value: `true`
