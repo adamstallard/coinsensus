@@ -12,7 +12,8 @@ The token is distributed according to votes.  During each time period, white-lis
 1. Addresses to be added to the voting white-list
 1. Addresses to be removed from the voting white-list
 1. Addresses to receive new tokens
-and [a few other variables](#variables)
+
+and [a few other variables](#variables).  There are also [constants](#constants) hard-coded in the contract instance to set bounds for the variables in proposals.
 
 Members decide near-unanimously who their membership is and who receives tokens each round.  Token-holders can also be paid semi-regularly with the ether (or other tokens) that accumulate from voting or other fees or donor deposits.
 
