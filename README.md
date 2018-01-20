@@ -8,7 +8,7 @@ The voting group votes on their own membership, contract token recipients, and w
 
 ## Summary
 
-The token is distributed according to votes.  During each time period, white-listed voters send their vote to the smart contract.  The transfer is a small amount of ether--the actual vote is an address that holds a proposal.  The proposal address is another smart contract that's capable of sending the following to the original contract.
+The token is distributed according to votes.  During each time period, white-listed voters send their vote to the smart contract.  The transfer is a small amount of ether--the actual vote is an address that holds a proposal.  The proposal address is another smart contract that's capable of sending the following variables to the original contract.
 1. Addresses to be added to the voting white-list
 1. Addresses to be removed from the voting white-list
 1. Addresses to receive new tokens
