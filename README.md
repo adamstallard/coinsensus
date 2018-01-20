@@ -131,7 +131,7 @@ How long a voting round lasts.
 
 ### `VOTE_FEE_ROUNDS`
 #### suggested value: `4`
-The number of successive matching proposals with regard to [vote fee variables](#votefeevariables) needed to change vote fees.
+The number of successive matching proposals with regard to [vote fee variables](#vote-fee-variables) needed to change vote fees.
 
 ### `ENABLE_VOTE_FEES`
 #### suggested value: `true`
