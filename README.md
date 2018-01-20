@@ -4,12 +4,15 @@ Coinsensus is a token that's regularly minted and distributed according to near-
 
 The address of the token contract can hold other tokens given to it as fees or donations. Holders of the main contract token may receive these as dividends.
 
+The voting group votes on their own membership, contract token recipients, and what triggers a dividend payment.
+
 ## Summary
 
 The token is distributed according to votes.  During each time period, white-listed voters send their vote to the smart contract.  The transfer is a small amount of ether--the actual vote is an address that holds a proposal.  The proposal address is another smart contract that's capable of sending the following to the original contract.
 1. Addresses to be added to the voting white-list
 1. Addresses to be removed from the voting white-list
 1. Addresses to receive new tokens
+and [a few other variables](#variables)
 
 Members decide near-unanimously who their membership is and who receives tokens each round.  Token-holders can also be paid semi-regularly with the ether (or other tokens) that accumulate from voting or other fees or donor deposits.
 
