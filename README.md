@@ -45,11 +45,11 @@ The contract stores votes for the current round--one or zero votes per [voter](#
 ### `acceptedTokens`
 The contract stores a list of tokens it will accept.  It has to be familiar with the logic for sending these tokens (for instance ERC20, ERC223).
 
-### `minimumTokenPayout`
-For each accepted token, there's a minimum amount that can be paid to an address as a [dividend](#dividends). This is to avoid generating excessive transactions for small balances.
-
 ### `mostVotesPerRound`
 The highest number of votes received so far in a round. Used for computing [`dividendWhenAdded`](#dividendWhenAdded).
+
+### `dividends`
+For each type of accepted token, the number of tokens available to be collected as dividends.  
 
 ### Other Variables
 [Other variables](#variables) affecting the operation of the contract are updated to match the variables set by a winning [proposal](#proposals) when the [proposal is run](#runproposal).
