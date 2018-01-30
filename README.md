@@ -1,21 +1,34 @@
 # Coinsensus
 
-Coinsensus is a token that's regularly minted and distributed according to near-consensus of a voting group with a growing or fluctuating membership.
+## Purpose
 
-The address of the token contract can hold other tokens given to it as fees or donations. Holders of the main contract token may receive these as dividends.
+An instance of coinsensus is a fund that's managed by a voting group.  The instance has its own token which entitles its holders to dividends from a vault of contributed tokens of other types.  The instance token is meant to circulate and have value from the anticipation of future dividends.
 
-The voting group votes on their own membership, contract token recipients, and what triggers a dividend payment.
+## Use Cases
 
-## Summary
+In all cases, the voting group distributes control to several people, entities, or programs.  This structure provides checks and avoids single-points-of-failure.  The voting group should be able to agree with near-consensus.
 
-The token is distributed according to votes.  During each time period, white-listed voters send their vote to the smart contract.  The transfer is a small amount of ether--the actual vote is an address that holds a proposal.  The proposal address is another smart contract that's capable of sending the following variables to the original contract.
+The vault can represent a combination of fees, payments, and contributions.
+
+The token can be used to 
+
+1.  Fund organizations or projects
+2.  Reward processes that happen "off-chain", such as research, validation, mining, etc.
+
+In the particular case of BrightID, the token is used to reward nodes for running anti-sybil software; and the voting group consists of the nodes themselves.  The funding comes from partners that are interested in using BrightID to limit duplicate and fake accounts.
+
+## Operation
+
+The voting group votes on their own membership, instance token recipients, and what triggers a dividend payment.
+
+During each time period, white-listed voters send their vote to the smart contract.  The transfer is a small amount of ether--the actual vote is for an address that holds a proposal.  The proposal address is another smart contract that contains:
 1. Addresses to be added to the voting white-list
 1. Addresses to be removed from the voting white-list
 1. Addresses to receive new tokens
 
-and [a few other variables](#variables).  There are also [constants](#constants) hard-coded in the contract instance to set bounds for the variables in proposals.
+and [a few other variables](#variables).
 
-Members decide near-unanimously who their membership is and who receives tokens each round.  Token-holders can also be paid semi-regularly with the ether (or other tokens) that accumulate from voting or other fees or donor deposits.
+There are also [constants](#constants) that are set at the time the instance is created to enforce bounds for the variables in proposals.
 
 Near-consensus is required among those that vote each round, but there's no requirement of quorum.
 
