@@ -6,16 +6,16 @@ An instance of coinsensus is a fund that's managed by a voting group.  The insta
 
 ## Use Cases
 
-In all cases, the voting group distributes control to several people, entities, or programs.  This structure provides checks and avoids single-points-of-failure.  The voting group should be able to agree with near-consensus.
-
-The vault can represent a combination of fees, payments, and contributions.
-
 The token can be used to 
 
 1.  Fund organizations or projects
 2.  Reward processes that happen "off-chain", such as research, validation, mining, etc.
 
-In the particular case of BrightID, the token is used to reward nodes for running anti-sybil software; and the voting group consists of the nodes themselves.  The funding comes from partners that are interested in using BrightID to limit duplicate and fake accounts.
+The voting group can consist of people, entities, or programs.  The group structure is intended to provide checks and avoid single points of failure.  The voting group should be able to agree with near-consensus.
+
+The vault can represent a combination of fees, payments, and contributions.
+
+In the particular case of BrightID, the token is used to reward nodes for running anti-sybil software; the voting group consists of the nodes themselves.  The funding comes from partners that are interested in using BrightID to limit duplicate and fake accounts.
 
 ## Operation
 
