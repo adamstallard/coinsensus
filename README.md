@@ -2,14 +2,14 @@
 
 ## Purpose
 
-An instance of coinsensus is a fund that's managed by a voting group.  The instance has its own token which entitles its holders to dividends from a vault of contributed tokens of other types.  The instance token is meant to circulate and have value from the anticipation of future dividends.
+Each instance of coinsensus is a fund that's managed by a voting group.  The instance has its own token which entitles its holders to dividends from a vault of contributed tokens of other types.  The instance token is meant to circulate and have value from the anticipation of future dividends.
 
 ## Use Cases
 
 The token can be used to 
 
 1.  Fund organizations or projects
-2.  Reward processes that happen "off-chain", such as research, validation, mining, etc.
+2.  Reward processes that happen "off-chain", such as research, validation, or mining.
 
 The voting group can consist of people, entities, or programs.  The group structure is intended to provide checks and avoid single points of failure.  The voting group should be able to agree with near-consensus.
 
@@ -48,8 +48,23 @@ The contract stores a list of tokens it will accept.  It has to be familiar with
 ### `mostVotesPerRound`
 The highest number of votes received so far in a round. Used for computing [`dividendWhenAdded`](#dividendWhenAdded).
 
-### `dividends`
-For each type of accepted token, the number of tokens available to be collected as dividends.  
+### `dividendRatio`
+For each type of accepted token, the ratio of the number of that token that has been made available as dividends to the total supply of the instance token.
+
+For example, if 10 XYZ tokens were made available to be claimed as dividends, and the total supply of the instance token were 1000, then the dividend ratio for XYZ tokens would be .01.  If the next dividend event made 20 more XYZ tokens available and the total supply of the instance token at that time were 4000, then the dividend ratio would increase by .005, i.e. it would increase from .01 to .015.
+
+`DividendRatio`s don't decrease when dividends are claimed--they represent all the dividends that were ever made available.
+
+### `totalSupply`
+Total supply of the instance token.
+
+### `lastRatio`
+Whenever an account balance changes, a `lastRatio` variable for that account is set to the current [`dividendRatio`](#dividendRatio) for the token, after `owed` for that token is updated.
+
+### `owed`
+Whenever an account balance changes, an `owed` variable for that account is incremented by the current [`dividendRatio`](#dividendRatio) minus the account's [`lastRatio`](#lastRatio) value for the token multiplied by the account balance. I.e. `(dR - lR) * b`.  This is the amount of that token that can be claimed by the owner of the account.
+
+Newly minted instance tokens get the current [`dividendRatio`](#dividendRatio) as their [`lastRatio`](#lastRatio). Sent tokens get the [`lastRatio`](#lastRatio) of the sender.  The `lastRatio` for an account is computed proportionally using the `lastRatio` value for all of its tokens.
 
 ### Other Variables
 [Other variables](#variables) affecting the operation of the contract are updated to match the variables set by a winning [proposal](#proposals) when the [proposal is run](#runproposal).
@@ -88,7 +103,7 @@ An array of addresses to add to [voters](#voters).  This part of a proposal can 
 An array of addesses to remove from [voters](#voters).
 
 #### `dividendWhenAdded`
-All tokens (including ether) held by the contract address will be paid out proportionally to token holders if the number of votes in a round exceeds the previous highest number of votes by this value. The value can be negative. A value of `INT256_MIN` will cause the dividend to be paid no matter what, while `INT256_MAX` will prevent payment of the dividend.
+Dividends are made available--i.e. [`dividendRatio`](#dividendRatio) is updated for each token proportionally to token holders if the number of votes in a round exceeds the previous highest number of votes by this value. The value can be negative. A value of `INT256_MIN` will cause the dividend to be paid no matter what, while `INT256_MAX` will prevent payment of the dividend.
 
 #### `acceptToken`
 The main contract will start [accepting this kind of token.](#acceptedtokens).  Each accepted token is a pair of <``tokenAddress`` , [``minimumTokenPayout``](#minimumtokenpayout)>. This variable is also used to update the [minimumTokenPayout](#minimumtokenpayout) for an already accepted token.
