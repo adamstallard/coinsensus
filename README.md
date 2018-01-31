@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Each instance of coinsensus is a fund that's managed by a voting group.  The instance has its own token which entitles its holders to dividends from a vault of contributed tokens of other types.  The instance token is meant to circulate and have value from the anticipation of future dividends.
+Each instance of coinsensus is a fund that's managed by a voting group.  The instance has its own token which entitles its holders to receive dividends from a vault of contributed tokens of other types.  The instance token is meant to circulate and have value from the anticipation of future dividends.
 
 ## Use Cases
 
@@ -51,7 +51,7 @@ The highest number of votes received so far in a round. Used for computing [`div
 ### `dividendRatio`
 For each type of accepted token, the ratio of the number of that token that has been made available as dividends to the total supply of the instance token.
 
-For example, if 10 XYZ tokens were made available to be claimed as dividends, and the total supply of the instance token were 1000, then the dividend ratio for XYZ tokens would be .01.  If the next dividend event made 20 more XYZ tokens available and the total supply of the instance token at that time were 4000, then the dividend ratio would increase by .005, i.e. it would increase from .01 to .015.
+For example, if 10 XYZ tokens are made available to be claimed as dividends, and the total supply of the instance token is 1000, then the dividend ratio for XYZ tokens would be .01.  If the next dividend event makes 20 more XYZ tokens available and the total supply of the instance token at that time were 4000, then the dividend ratio would increase by .005, i.e. it would increase from .01 to .015.
 
 `DividendRatio`s don't decrease when dividends are claimed--they represent all the dividends that were ever made available.
 
@@ -59,10 +59,10 @@ For example, if 10 XYZ tokens were made available to be claimed as dividends, an
 Total supply of the instance token.
 
 ### `lastRatio`
-Whenever an account balance changes, a `lastRatio` variable for that account is set to the current [`dividendRatio`](#dividendRatio) for the token, after `owed` for that token is updated.
+Whenever an account balance changes, a `lastRatio` variable for that account is set to the current [`dividendRatio`](#dividendRatio) for the token, after `owed` for that token and account is updated.
 
 ### `owed`
-Whenever an account balance changes, an `owed` variable for that account is incremented by the current [`dividendRatio`](#dividendRatio) minus the account's [`lastRatio`](#lastRatio) value for the token multiplied by the account balance. I.e. `(dR - lR) * b`.  This is the amount of that token that can be claimed by the owner of the account.
+Whenever an account balance changes, the `owed` variables for that account is incremented by the current [`dividendRatio`](#dividendRatio) minus the account's [`lastRatio`](#lastRatio) value for each token multiplied by the account balance. I.e. `(dR - lR) * b`.  This is the amount of that token that can be claimed by the owner of the account.
 
 Newly minted instance tokens get the current [`dividendRatio`](#dividendRatio) as their [`lastRatio`](#lastRatio). Sent tokens get the [`lastRatio`](#lastRatio) of the sender.  The `lastRatio` for an account is computed proportionally using the `lastRatio` value for all of its tokens.
 
