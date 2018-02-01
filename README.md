@@ -34,7 +34,7 @@ There are also [constants](#constants) that are set at the time the instance is 
 
 ## Storage
 ### `voters`
-The contract maintains a list of voter addresses. Voters vote each round by submitting the address of a [proposal smart contract](#proposals).
+The contract maintains a list of voter addresses. Voters vote each round by submitting the address of a [proposal contract](#proposals).
 
 ### `balance`
 The contract stores balances of tokens. Holding tokens is not limited to [voters](#voters).
