@@ -101,10 +101,10 @@ An map of addresses to ratios. Each address will receive that ratio of the coins
 The address that's authorized to call [RunProposal](#runproposal) on behalf of this proposal.
 
 #### `addVoters`
-An array of addresses to add to [voters](#voters).  This part of a proposal can be executed by itself if [Add_Voters_Marjority](#add_voters_majority) is reached, while [Near_Consensus](#near_consensus) isn't.
+An array of addresses to add to [voters](#voters). Constrained by [`MAX_VOTERS_ADD_RATIO`](#max_voters_add_ratio). This part of a proposal can be executed by itself if [`ADD_VOTERS_MAJORITY`](#add_voters_majority) is reached, while [`NEAR_CONSENSUS`](#near_consensus) isn't.
 
 #### `removeVoters`
-An array of addesses to remove from [voters](#voters).
+An array of addesses to remove from [voters](#voters). Constrained by [`MAX_VOTERS_REMOVE_RATIO`](#max_voters_remove_ratio).
 
 #### `dividendWhen`
 More dividends are added if the number of votes in a round exceeds the previous highest number of votes by this value. The value can be negative. A value of `INT256_MIN` will always cause more dividends to be added, while `INT256_MAX` will always prevent more dividends from being added.
