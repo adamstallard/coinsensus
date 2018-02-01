@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Each instance of coinsensus is a fund that's managed by a voting group.  The instance has its own token which entitles its holders to receive dividends from a vault of contributed tokens of other types.  The instance token is meant to circulate and have value from the anticipation of future dividends.
+Each instance of coinsensus is a fund that's managed by a voting group.  The instance has its own token which entitles its holders to receive dividends from a vault of contributed tokens of other types.  The instance token is meant to circulate and have value in anticipation of future dividends.
 
 ## Use Cases
 
@@ -107,34 +107,15 @@ An array of addresses to add to [voters](#voters).  This part of a proposal can 
 An array of addesses to remove from [voters](#voters).
 
 #### `dividendWhenAdded`
-Dividends are made available--i.e. [`dividendRatio`](#dividendRatio) is updated for each token if the number of votes in a round exceeds the previous highest number of votes by this value. The value can be negative. A value of `INT256_MIN` will cause the dividend to be paid no matter what, while `INT256_MAX` will prevent payment of the dividend.
+More dividends are added if the number of votes in a round exceeds the previous highest number of votes by this value. The value can be negative. A value of `INT256_MIN` will always cause more dividends to be added, while `INT256_MAX` will always prevent more dividends from being added.
+
+Dividends are added for each token held by the contract, by increasing the [`dividendRatio`](#dividendRatio) values for each token type.
 
 #### `acceptToken`
-The main contract will start [accepting this kind of token.](#acceptedtokens).  Each accepted token is a pair of <``tokenAddress`` , [``minimumTokenPayout``](#minimumtokenpayout)>. This variable is also used to update the [minimumTokenPayout](#minimumtokenpayout) for an already accepted token.
+The main contract will start [accepting this kind of token.](#acceptedtokens).
 
 #### `rejectToken`
 The main contract will stop [accepting this kind of token.](#acceptedtokens)
-
-### Vote Fee Variables
-### :warning:
-The following three variables can easily block the main contract from operating (for example, by setting the [voteFee](#voteFee) very high or setting the [voteFeeToken](#voteFeeToken) to a token that's hard to obtain). As such, the same variable values must appear in successive proposals for a [predetermined number of rounds](#vote_fee_rounds) before they take effect. There's also [a constant to disable these variables completely](#enable_vote_fees).
-
-#### `voteFee`
-A fee required for each vote. This must be paid in addition to the transaction fee required by the network. If [`voteFeeGasPriceMultiple`](#votefeegaspricemultiple) is non-zero, it's used instead.
-
-#### `voteFeeGasPriceMultiple`
-The fee required for each vote as a multiple of the gas price set in the call to [`vote`](#vote). If this variable is non-zero, it's used instead of [`voteFee`](#votefee).
-
-#### `voteFeeToken`
-A token contract address (`0x0` for ether) used to pay the [vote fee](#votefee). This must be on the [list of accepted tokens](#acceptedtokens) for the main contract.
-
-## Dividends
-
-If the number of voters participating in a round meets the [`dividendWhenAdded`](#dividendwhenadded) constraint, holders of the token will be paid a dividend which is a predetermined [fraction of the contract address' holdings of other types of tokens](#dividend_fraction). Each holder is paid proportionally to the number of main contract tokens they hold. Those whose payment would fall below the [minimum token payout](#minimum-token-payout) for a particular token will be excluded from the payout for that token.
-
-## Contributions
-
-To contribute to the success of the mission of a particular instance of the token, participants may contribute [any accepted tokens](#accepted-tokens)
 
 ## Constants
 Each instance of the token contract is initialized with the following constants:
@@ -165,13 +146,5 @@ The ratio of votes a proposal needs for the [addVoters](#addvoters) portion of a
 #### suggested value: `25`
 How long a voting round lasts.
 
-### `VOTE_FEE_ROUNDS`
-#### suggested value: `4`
-The number of successive matching proposals with regard to [vote fee variables](#vote-fee-variables) needed to change vote fees.
-
-### `ENABLE_VOTE_FEES`
-#### suggested value: `true`
-Whether to use [vote fees](#votefeevariables). These can be helpful in bootstrapping value, but must be used carefully.
-
 ### `DIVIDEND_FRACTION`
-The fraction of the total holdings to be paid out when the [`dividendWhenAdded`](#dividendwhenadded) of a proposal is met. A value of `1` means that 100% of the holdings will be paid. A value of `.05` means that 5% of the holdings will be paid.
+The fraction of the total holdings of tokens to be [converted to dividends](#dividendRatio) when the [`dividendWhenAdded`](#dividendwhenadded) constraint of a proposal is met. A value of `1` means that 100% of the holdings will be paid. A value of `.05` means that 5% of the holdings will be paid.
