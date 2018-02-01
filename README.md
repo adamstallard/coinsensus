@@ -140,7 +140,7 @@ The ratio of votes that need to agree for a proposal to be enacted. It's possibl
 
 ### `ADD_VOTERS_MAJORITY`
 #### suggested value: `.51`
-The ratio of votes a proposal needs for the [addVoters](#addvoters) portion of a proposal to be enacted. Having this value distinct from [NEAR_CONSENSUS](#NEAR_CONSENSUS) allows voters to unblock proposals by adding more voters.
+The ratio of votes a proposal needs for the [addVoters](#addvoters) portion of a proposal to be enacted. Having this value distinct from [NEAR_CONSENSUS](#near_consensus) allows voters to unblock proposals by adding more voters.
 
 ### `ROUND_LENGTH_HOURS`
 #### suggested value: `25`
