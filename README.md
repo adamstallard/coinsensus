@@ -49,7 +49,7 @@ The contract stores a list of tokens it will accept.  It has to be familiar with
 The highest number of votes received so far in a round. Used for computing [`dividendWhen`](#dividendwhen).
 
 ### `dividendRatio`
-For each type of accepted token, `dividendRatio` represents the number of tokens previously made available as dividends to the total supply of the instance token.
+For each type of accepted token, `dividendRatio` represents the number of tokens [previously made available as dividends](#dividendwhen) to the [total supply of the instance token](#totalsupply).
 
 The `dividendratio` values increase when [dividends occur](#dividendwhen) and decrease when [instance tokens are minted](#newtokenratio).
 
