@@ -97,11 +97,11 @@ Proposals are executed with the [`RunProposal`](#runproposal) function of the ma
 The following variables can be included in a proposal and if the [proposal is run](#runproposal), they will be used as parameters in the current run or to change the corresponding storage on the main contract.
 
 #### `newTokenRatio`
-This is the number of new tokens to mint as a ratio of the amount of existing tokens, rounded up to the nearest whole number. A value of `.01` means that if there are 100 tokens in existence, 1 token will be minted next round. With 101 tokens in existence, and a value of `.01`, 2 new tokens would be minted.
+This is the number of new tokens to mint as a ratio of the number of existing tokens, rounded up to the nearest whole number. A value of `.01` means that if there are 100 tokens in existence, 1 token will be minted next round. With 101 tokens in existence, and a value of `.01`, 2 new tokens would be minted.
 
 The value for `newTokenRatio` is constrained by [`MAX_NEW_TOKEN_RATIO`](#max_new_token_ratio).
 
-[`dividendRatio`](#dividendratio) values for each token are updated when tokens are minted.
+[`dividendRatio`](#dividendratio) values for each token are decreased when tokens are minted.
 
 #### `recipients`
 An map of addresses to ratios. Each address will receive that ratio of the coins minted this round. The ratios must add up to one.
