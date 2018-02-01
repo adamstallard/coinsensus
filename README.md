@@ -46,7 +46,7 @@ The contract stores votes for the current round--one or zero votes per [voter](#
 The contract stores a list of tokens it will accept.  It has to be familiar with the logic for sending these tokens (for instance ERC20, ERC223).
 
 ### `mostVotesPerRound`
-The highest number of votes received so far in a round. Used for computing [`dividendWhenAdded`](#dividendWhenAdded).
+The highest number of votes received so far in a round. Used for computing [`dividendWhenAdded`](#dividendwhenadded).
 
 ### `dividendRatio`
 For each type of accepted token, `dividendRatio` represents the number of tokens previously made available as dividends to the total supply of the instance token.
@@ -59,10 +59,10 @@ For example, if 10 XYZ tokens are made available to be claimed as dividends, and
 Total supply of the instance token.
 
 ### `owed`
-When an account's balance changes or [dividends are claimed](#claim), the values of `owed` for each type of token are incremented for that account by the current [`dividendRatio`](#dividendRatio) minus the account's [`lastRatio`](#lastRatio) value for each token multiplied by the account balance. I.e. `(DR - LR) * b`.  Sent tokens are included the sender's balance (not the receivers), and newly minted tokens aren't included in the balance in this calculation.
+When an account's balance changes or [dividends are claimed](#claim), the values of `owed` for each type of token are incremented for that account by the current [`dividendRatio`](#dividendratio) minus the account's [`lastRatio`](#lastratio) value for each token multiplied by the account balance. I.e. `(DR - LR) * b`.  Sent tokens are included the sender's balance (not the receivers), and newly minted tokens aren't included in the balance in this calculation.
 
 ### `lastRatio`
-After an account's [`owed`](#owed) values have been updated due to a balance change, the account's [`lastRatio`] value for each type of token is set to the current [`dividendRatio`] for that token.
+After an account's [`owed`](#owed) values have been updated due to a balance change, the account's [`lastRatio`](#lastratio) value for each type of token is set to the current [`dividendRatio`](#dividendratio) for that token.
 
 ### Other Variables
 [Other variables](#variables) affecting the operation of the contract are updated to match the variables set by a winning [proposal](#proposals) when the [proposal is run](#runproposal).
@@ -76,7 +76,7 @@ The caller must already be on the list of [voter addresses](#voters). This sets 
 This may be called once after a round is closed by the [proposal caller](#proposalcaller) set in the proposal that was selected with [near-consensus](#near-consensus). If there was no such proposal, calling this function has no effect.
 
 ### `Send`
-Send instance tokens to another account.  [`balance`](#balance), [`lastRatio`](#lastRatio), and [`owed`](#owed) are updated for both accounts.
+Send instance tokens to another account.  [`balance`](#balance), [`lastRatio`](#lastratio), and [`owed`](#owed) are updated for both accounts.
 
 ### `Claim`
 Claim all dividends of the specified token type.
@@ -109,7 +109,7 @@ An array of addesses to remove from [voters](#voters).
 #### `dividendWhenAdded`
 More dividends are added if the number of votes in a round exceeds the previous highest number of votes by this value. The value can be negative. A value of `INT256_MIN` will always cause more dividends to be added, while `INT256_MAX` will always prevent more dividends from being added.
 
-Dividends are added for each token held by the contract, by increasing the [`dividendRatio`](#dividendRatio) values for each token type.
+Dividends are added for each token held by the contract, by increasing the [`dividendRatio`](#dividendratio) values for each token type.
 
 #### `acceptToken`
 The main contract will start [accepting this kind of token.](#acceptedtokens).
@@ -147,4 +147,4 @@ The ratio of votes a proposal needs for the [addVoters](#addvoters) portion of a
 How long a voting round lasts.
 
 ### `DIVIDEND_FRACTION`
-The fraction of the total holdings of tokens to be [converted to dividends](#dividendRatio) when the [`dividendWhenAdded`](#dividendwhenadded) constraint of a proposal is met. A value of `1` means that 100% of the holdings will be paid. A value of `.05` means that 5% of the holdings will be paid.
+The fraction of the total holdings of tokens to be [converted to dividends](#dividendratio) when the [`dividendWhenAdded`](#dividendwhenadded) constraint of a proposal is met. A value of `1` means that 100% of the holdings will be paid. A value of `.05` means that 5% of the holdings will be paid.
