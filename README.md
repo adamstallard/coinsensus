@@ -109,7 +109,7 @@ An array of addesses to remove from [voters](#voters).
 #### `dividendWhenAdded`
 More dividends are added if the number of votes in a round exceeds the previous highest number of votes by this value. The value can be negative. A value of `INT256_MIN` will always cause more dividends to be added, while `INT256_MAX` will always prevent more dividends from being added.
 
-Dividends are added for each token held by the contract, by increasing the [`dividendRatio`](#dividendratio) values for each token type.
+Dividends are added for each token held by the contract by increasing the [`dividendRatio`](#dividendratio) values for each token type.
 
 #### `acceptToken`
 The main contract will start [accepting this kind of token.](#acceptedtokens).
