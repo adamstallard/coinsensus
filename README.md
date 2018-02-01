@@ -53,7 +53,7 @@ For each type of accepted token, `dividendRatio` represents the number of tokens
 
 For example, if 10 XYZ tokens are made available to be claimed as dividends, and the total supply of the instance token is 1000, then the dividend ratio for XYZ tokens would be .01.  If the next dividend event makes 20 more XYZ tokens available and the total supply of the instance token at that time were 4000, then the dividend ratio would increase by .005, i.e. it would increase from .01 to .015.
 
-`DividendRatio`s don't decrease when dividends are claimed--they represent all the dividends that were ever made available.
+`DividendRatio`s don't decrease when dividends are claimed; they represent all the dividends that were ever made available.
 
 ### `totalSupply`
 Total supply of the instance token.
