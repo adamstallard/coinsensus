@@ -128,7 +128,7 @@ A value of `.01` means that if there are 100 current voters, a maximum of 1 can 
 ### `MAX_VOTERS_REMOVE_RATIO`
 #### suggested value: `.01`
 
-Operates similarly to [MAX_VOTERS_ADD_RATIO](#max-voters-add-ratio), but for removing voters.
+Operates similarly to [MAX_VOTERS_ADD_RATIO](#max_voters_add_ratio), but for removing voters.
 
 ### `MAX_NEW_TOKEN_RATIO`
 #### suggested value: `.03`
