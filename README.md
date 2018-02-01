@@ -59,7 +59,7 @@ For example, if 10 XYZ tokens are made available to be claimed as dividends, and
 Total supply of the instance token.
 
 ### `owed`
-When an account's balance changes or [dividends are claimed](#claim), the values of `owed` for each type of token are incremented for that account by the current [`dividendRatio`](#dividendratio) minus the account's [`lastRatio`](#lastratio) value for each token multiplied by the account balance. I.e. `(DR - LR) * b`.  Sent tokens are included the sender's balance (not the receivers), and newly minted tokens aren't included in the balance in this calculation.
+When an account's balance changes or [dividends are claimed](#claim), the values of `owed` for each type of token are incremented for that account by the current [`dividendRatio`](#dividendratio) minus the account's [`lastRatio`](#lastratio) value for each token multiplied by the account balance. I.e. `(DR - LR) * b`.  Sent tokens are included the sender's balance (not the receivers), and newly minted tokens aren't included in the balance.
 
 ### `lastRatio`
 After an account's [`owed`](#owed) values have been updated due to a balance change, the account's [`lastRatio`](#lastratio) value for each type of token is set to the current [`dividendRatio`](#dividendratio) for that token.
