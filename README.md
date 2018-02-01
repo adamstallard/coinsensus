@@ -51,9 +51,11 @@ The highest number of votes received so far in a round. Used for computing [`div
 ### `dividendRatio`
 For each type of accepted token, `dividendRatio` represents the number of tokens previously made available as dividends to the total supply of the instance token.
 
-For example, if 10 XYZ tokens are made available to be claimed as dividends, and the total supply of the instance token is 1000, then the dividend ratio for XYZ tokens would be .01.  If the next dividend event makes 20 more XYZ tokens available and the total supply of the instance token at that time were 4000, then the dividend ratio would increase by .005, i.e. it would increase from .01 to .015.
+The `dividendratio` values increase when [dividends occur](#dividendwhen) and decrease when [instance tokens are minted](#newtokenratio).
 
-`DividendRatio`s don't decrease when dividends are claimed; they represent all the dividends that were ever made available.
+For example, if 10 XYZ tokens are made available to be claimed as dividends, and the total supply of the instance token is 1000, then the `dividendRatio` for XYZ tokens would be .01.  If the [instance token supply](#totalsupply) increases to 1250 due to [minting](#newtokenratio)--without an intervening [dividend event](#dividendwhen), the `dividendRatio` for XYZ would become .008. (`1000 * .01 / 1250`). If the next dividend event makes 25 more XYZ tokens available and the total supply of the instance token at that time is still 1250, then the `dividendRatio` would increase by .02 (`25 / 1250`); i.e. it would increase from .008 to .028.  This means that 35 (`1250 * .028`) XYZ tokens were made available to be claimed as dividends.
+
+`DividendRatio` values don't decrease when dividends are claimed; they represent all the dividends that were ever made available.
 
 ### `totalSupply`
 Total supply of the instance token.
@@ -64,8 +66,10 @@ Number of voters in [`voters`](#voters).
 ### `owed`
 When an account's balance changes or [dividends are claimed](#claim), the values of `owed` for each type of token are incremented for that account by the current [`dividendRatio`](#dividendratio) minus the account's [`lastRatio`](#lastratio) value for each token multiplied by the account balance. I.e. `(DR - LR) * b`.  Sent tokens are included the sender's balance (not the receivers), and newly minted tokens aren't included in the balance.
 
+If [`lastRatio`](#lastratio) is greater than [`dividendRatio`](#dividendratio), no change is made. 
+
 ### `lastRatio`
-After an account's [`owed`](#owed) values have been updated due to a balance change, the account's [`lastRatio`](#lastratio) value for each type of token is set to the current [`dividendRatio`](#dividendratio) for that token.
+After an account's [`owed`](#owed) values have been updated due to a balance change, the account's `lastRatio` value for each type of token is set to the current [`dividendRatio`](#dividendratio) for that token if it's greater than the `lastRatio` value.
 
 ### Other Variables
 [Other variables](#variables) affecting the operation of the contract are updated to match the variables set by a winning [proposal](#proposals) when the [proposal is run](#runproposal).
@@ -96,6 +100,8 @@ The following variables can be included in a proposal and if the [proposal is ru
 This is the number of new tokens to mint as a ratio of the amount of existing tokens, rounded up to the nearest whole number. A value of `.01` means that if there are 100 tokens in existence, 1 token will be minted next round. With 101 tokens in existence, and a value of `.01`, 2 new tokens would be minted.
 
 The value for `newTokenRatio` is constrained by [`MAX_NEW_TOKEN_RATIO`](#max_new_token_ratio).
+
+[`dividendRatio`](#dividendratio) values for each token are updated when tokens are minted.
 
 #### `recipients`
 An map of addresses to ratios. Each address will receive that ratio of the coins minted this round. The ratios must add up to one.
