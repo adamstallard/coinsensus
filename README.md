@@ -46,7 +46,7 @@ The contract stores votes for the current round--one or zero votes per [voter](#
 The contract stores a list of tokens it will accept.  It has to be familiar with the logic for sending these tokens (for instance ERC20, ERC223).
 
 ### `mostVotesPerRound`
-The highest number of votes received so far in a round. Used for computing [`dividendWhenAdded`](#dividendwhenadded).
+The highest number of votes received so far in a round. Used for computing [`dividendWhen`](#dividendwhen).
 
 ### `dividendRatio`
 For each type of accepted token, `dividendRatio` represents the number of tokens previously made available as dividends to the total supply of the instance token.
@@ -106,7 +106,7 @@ An array of addresses to add to [voters](#voters).  This part of a proposal can 
 #### `removeVoters`
 An array of addesses to remove from [voters](#voters).
 
-#### `dividendWhenAdded`
+#### `dividendWhen`
 More dividends are added if the number of votes in a round exceeds the previous highest number of votes by this value. The value can be negative. A value of `INT256_MIN` will always cause more dividends to be added, while `INT256_MAX` will always prevent more dividends from being added.
 
 Dividends are added for each token held by the contract by increasing the [`dividendRatio`](#dividendratio) values for each token type.
@@ -147,4 +147,4 @@ The ratio of votes a proposal needs for the [addVoters](#addvoters) portion of a
 How long a voting round lasts.
 
 ### `DIVIDEND_FRACTION`
-The fraction of the non-dividend holdings of tokens to be [added to dividends](#dividendratio) when the [`dividendWhenAdded`](#dividendwhenadded) constraint of a proposal is met. A value of `1` means that 100% of the remaining holdings will be added. A value of `.05` means that 5% of the remaining holdings will be added.
+The fraction of the non-dividend holdings of tokens to be [added to dividends](#dividendratio) when the [`dividendWhen`](#dividendwhen) constraint of a proposal is met. A value of `1` means that 100% of the remaining holdings will be added. A value of `.05` means that 5% of the remaining holdings will be added.
