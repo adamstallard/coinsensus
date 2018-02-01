@@ -36,7 +36,7 @@ Near-consensus is required among those that vote each round, but there's no requ
 ### `voters`
 The contract maintains a list of voter addresses. Voters vote each round by submitting the address of a [proposal smart contract](#proposals).
 
-### `balances`
+### `balance`
 The contract stores balances of tokens. Holding tokens is not limited to [voters](#voters).
 
 ### `recentVotes`
@@ -49,7 +49,7 @@ The contract stores a list of tokens it will accept.  It has to be familiar with
 The highest number of votes received so far in a round. Used for computing [`dividendWhenAdded`](#dividendWhenAdded).
 
 ### `dividendRatio`
-For each type of accepted token, the ratio of the number of that token that has been made available as dividends to the total supply of the instance token.
+For each type of accepted token, `dividendRatio` represents the number of tokens previously made available as dividends to the total supply of the instance token.
 
 For example, if 10 XYZ tokens are made available to be claimed as dividends, and the total supply of the instance token is 1000, then the dividend ratio for XYZ tokens would be .01.  If the next dividend event makes 20 more XYZ tokens available and the total supply of the instance token at that time were 4000, then the dividend ratio would increase by .005, i.e. it would increase from .01 to .015.
 
@@ -58,13 +58,11 @@ For example, if 10 XYZ tokens are made available to be claimed as dividends, and
 ### `totalSupply`
 Total supply of the instance token.
 
-### `lastRatio`
-Whenever an account balance changes, a `lastRatio` variable for that account is set to the current [`dividendRatio`](#dividendRatio) for the token, after `owed` for that token and account is updated.
-
 ### `owed`
-Whenever an account balance changes, the `owed` variables for that account is incremented by the current [`dividendRatio`](#dividendRatio) minus the account's [`lastRatio`](#lastRatio) value for each token multiplied by the account balance. I.e. `(dR - lR) * b`.  This is the amount of that token that can be claimed by the owner of the account.
+When an account's balance changes or [dividends are claimed](#claim), the values of `owed` for each type of token are incremented for that account by the current [`dividendRatio`](#dividendRatio) minus the account's [`lastRatio`](#lastRatio) value for each token multiplied by the account balance. I.e. `(DR - LR) * b`.  Sent tokens are included the sender's balance (not the receivers), and newly minted tokens aren't included in the balance in this calculation.
 
-Newly minted instance tokens get the current [`dividendRatio`](#dividendRatio) as their [`lastRatio`](#lastRatio). Sent tokens get the [`lastRatio`](#lastRatio) of the sender.  The `lastRatio` for an account is computed proportionally using the `lastRatio` value for all of its tokens.
+### `lastRatio`
+After an account's [`owed`](#owed) values have been updated due to a balance change, the account's [`lastRatio`] value for each type of token is set to the current [`dividendRatio`] for that token.
 
 ### Other Variables
 [Other variables](#variables) affecting the operation of the contract are updated to match the variables set by a winning [proposal](#proposals) when the [proposal is run](#runproposal).
@@ -77,8 +75,14 @@ The caller must already be on the list of [voter addresses](#voters). This sets 
 ### `RunProposal`
 This may be called once after a round is closed by the [proposal caller](#proposalcaller) set in the proposal that was selected with [near-consensus](#near-consensus). If there was no such proposal, calling this function has no effect.
 
+### `Send`
+Send instance tokens to another account.  [`balance`](#balance), [`lastRatio`](#lastRatio), and [`owed`](#owed) are updated for both accounts.
+
+### `Claim`
+Claim all dividends of the specified token type.
+
 ## Proposals
-Proposals are created as smart contracts. They hold data that serve as instructions to update the main contract. Proposals are the subject of [votes](#vote), and to be enacted, participating voters must choose a proposal with [near consensus](#near-consensus). The exception to this is [adding new voters](#addvoters), which can be done with a [simple majority](#add_voters_majority)
+Proposals are created as contracts. They hold data that serve as instructions to update the main contract. Proposals are the subject of [votes](#vote), and to be enacted, participating voters must choose a proposal with [near consensus](#near-consensus). The exception to this is [adding new voters](#addvoters), which can be done with a [simple majority](#add_voters_majority)
 
 Proposals are executed with the [`RunProposal`](#runproposal) function of the main contract. Because this can be expensive, it's expected that a proposal will include the [calling address](#proposalcaller) in the [recipients](#recipients) with a fair ratio of new coins.
 
@@ -103,7 +107,7 @@ An array of addresses to add to [voters](#voters).  This part of a proposal can 
 An array of addesses to remove from [voters](#voters).
 
 #### `dividendWhenAdded`
-Dividends are made available--i.e. [`dividendRatio`](#dividendRatio) is updated for each token proportionally to token holders if the number of votes in a round exceeds the previous highest number of votes by this value. The value can be negative. A value of `INT256_MIN` will cause the dividend to be paid no matter what, while `INT256_MAX` will prevent payment of the dividend.
+Dividends are made available--i.e. [`dividendRatio`](#dividendRatio) is updated for each token if the number of votes in a round exceeds the previous highest number of votes by this value. The value can be negative. A value of `INT256_MIN` will cause the dividend to be paid no matter what, while `INT256_MAX` will prevent payment of the dividend.
 
 #### `acceptToken`
 The main contract will start [accepting this kind of token.](#acceptedtokens).  Each accepted token is a pair of <``tokenAddress`` , [``minimumTokenPayout``](#minimumtokenpayout)>. This variable is also used to update the [minimumTokenPayout](#minimumtokenpayout) for an already accepted token.
