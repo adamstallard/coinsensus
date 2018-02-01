@@ -147,4 +147,4 @@ The ratio of votes a proposal needs for the [addVoters](#addvoters) portion of a
 How long a voting round lasts.
 
 ### `DIVIDEND_FRACTION`
-The fraction of the non-dividend holdings of tokens to be [added to dividends](#dividendratio) when the [`dividendWhen`](#dividendwhen) constraint of a proposal is met. A value of `1` means that 100% of the remaining holdings will be added. A value of `.05` means that 5% of the remaining holdings will be added.
+The fraction of the tokens that are not yet dividends to be [added to dividends](#dividendratio) when the [`dividendWhen`](#dividendwhen) constraint of a proposal is met. A value of `1` means that 100% of the remaining tokens will be added. A value of `.05` means that 5% of the remaining tokens will be added.
