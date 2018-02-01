@@ -30,7 +30,7 @@ and [a few other variables](#variables).
 
 There are also [constants](#constants) that are set at the time the instance is created to enforce bounds for the variables in proposals.
 
-Near-consensus is required among those that vote each round, but there's no requirement of quorum.
+[Near-consensus](#near_consensus) is required among those that vote each round, but there's no requirement of quorum.
 
 ## Storage
 ### `voters`
