@@ -58,6 +58,9 @@ For example, if 10 XYZ tokens are made available to be claimed as dividends, and
 ### `totalSupply`
 Total supply of the instance token.
 
+### `currentVoters`
+Number of voters.
+
 ### `owed`
 When an account's balance changes or [dividends are claimed](#claim), the values of `owed` for each type of token are incremented for that account by the current [`dividendRatio`](#dividendratio) minus the account's [`lastRatio`](#lastratio) value for each token multiplied by the account balance. I.e. `(DR - LR) * b`.  Sent tokens are included the sender's balance (not the receivers), and newly minted tokens aren't included in the balance.
 
@@ -123,7 +126,7 @@ Each instance of the token contract is initialized with the following constants:
 ### `MAX_VOTERS_ADD_RATIO`
 #### suggested value: `.03`
 
-A value of `.01` means that if there are 100 current voters, a maximum of 1 can be added in the next round.  `currentVoters * MAX_VOTERS_ADD_RATIO` is rounded up; with 101 current voters and a value of `.01`, 2 voters could be added.
+A value of `.01` means that if there are 100 [current voters](#currentvoters), a maximum of 1 can be added in the next round.  `currentVoters * MAX_VOTERS_ADD_RATIO` is rounded up; with 101 current voters and a value of `.01`, 2 voters could be added.
 
 ### `MAX_VOTERS_REMOVE_RATIO`
 #### suggested value: `.01`
