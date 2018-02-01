@@ -116,7 +116,7 @@ An array of addresses to add to [voters](#voters); constrained by [`MAX_VOTERS_A
 An array of addesses to remove from [voters](#voters); constrained by [`MAX_VOTERS_REMOVE_RATIO`](#max_voters_remove_ratio).
 
 #### `dividendWhen`
-More dividends are added if the number of votes in a round exceeds the previous highest number of votes by this value. The value can be negative. A value of `INT256_MIN` will always cause more dividends to be added, while `INT256_MAX` will always prevent more dividends from being added.
+Dividends are added if the number of votes in a round exceeds the previous highest number of votes by this value. The value can be negative. A value of `INT256_MIN` will always cause more dividends to be added, while `INT256_MAX` will always prevent more dividends from being added.
 
 Dividends are added for each token held by the contract by increasing the [`dividendRatio`](#dividendratio) values for each token type.
 
